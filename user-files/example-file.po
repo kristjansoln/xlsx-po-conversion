@@ -9,6 +9,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# Custom translator comment
+#. Extracted comment
+#: Reference comment
 msgid "Let’s make the web multilingual."
 msgstr "Machen wir das Internet mehrsprachig."
 
