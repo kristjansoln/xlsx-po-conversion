@@ -183,6 +183,9 @@ class PortableObjectFileToXLSX:
         # The languages headers
         for f in self.po_files:
             columns.append(f.locale)
+            if(f.locale == "default"):
+                print('Warning: No locale specification found, using default.\n'
+                      'You need to have "Language: bg_BG\\n" or similar in the header of the .po file.')
 
         return columns
 
