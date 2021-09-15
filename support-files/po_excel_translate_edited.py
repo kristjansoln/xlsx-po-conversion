@@ -14,8 +14,6 @@ from openpyxl.utils import get_column_letter
 from openpyxl.cell import WriteOnlyCell
 
 
-
-
 class ColumnHeaders:
     message_context = "Message context"
     message_id = "Message id"
@@ -82,21 +80,21 @@ class PortableObjectFileToXLSX:
     """
 
     def __init__(
-        self,
-        po_files: List[PortableObjectFile],
-        comment_types: List[CommentType],
-        output_file_path: Path,
-        width_message_context: int = 20,
-        width_message_id: int = 80,
-        width_message_translation: int = 80,
-        width_comments: int = 50,
-        wrap_message_id: bool = True,
-        wrap_comments: bool = False,
-        wrap_message_translation: bool = True,
-        always_write_message_context: bool = False,
-        lock_sheet: bool = False,
-        font_regular_name: str = "Verdana",
-        font_regular_size: int = 11,
+            self,
+            po_files: List[PortableObjectFile],
+            comment_types: List[CommentType],
+            output_file_path: Path,
+            width_message_context: int = 20,
+            width_message_id: int = 80,
+            width_message_translation: int = 80,
+            width_comments: int = 50,
+            wrap_message_id: bool = True,
+            wrap_comments: bool = False,
+            wrap_message_translation: bool = True,
+            always_write_message_context: bool = False,
+            lock_sheet: bool = False,
+            font_regular_name: str = "Verdana",
+            font_regular_size: int = 11,
     ):
         """
         message_context = namespace, is optional
@@ -183,7 +181,7 @@ class PortableObjectFileToXLSX:
         # The languages headers
         for f in self.po_files:
             columns.append(f.locale)
-            if(f.locale == "default"):
+            if f.locale == "default":
                 print('Warning: No locale specification found, using default.\n'
                       'You need to have "Language: bg_BG\\n" or similar in the header of the .po file.')
 
@@ -369,7 +367,9 @@ class PortableObjectFileToXLSX:
                     # Weird case
                     cell = WriteOnlyCell(self.work_sheet, value=msg.msgstr)
                     cell.font = self.font_fuzzy
-                    row.append(cell, unlock=self.unlock_message_locale)
+                    row.append(cell)
+                    unlock = self.unlock_message_locale
+                    # row.append(cell, unlock=self.unlock_message_locale)
                 else:
                     # Normal case
                     row.append(
@@ -388,13 +388,13 @@ class XLSXToPortableObjectFile:
     """
 
     def __init__(
-        self,
-        locale: str,
-        input_file_path: Path,
-        output_file_path: Path,
-        wrap_width: int = 240,
-        copy_metadata_from_target: bool = True,
-        encoding="utf-8",
+            self,
+            locale: str,
+            input_file_path: Path,
+            output_file_path: Path,
+            wrap_width: int = 240,
+            copy_metadata_from_target: bool = True,
+            encoding="utf-8",
     ):
 
         self.input_file_path = input_file_path
@@ -494,7 +494,8 @@ class XLSXToPortableObjectFile:
                     print("Error: Row %s is too short" % row)
 
         if not self.po_file:
-            sys.exit("No messages found, aborting", 1)
+            sys.exit("No messages found, aborting")
+            # sys.exit("No messages found, aborting", 1)
 
         self.save()
 
@@ -513,4 +514,3 @@ class XLSXToPortableObjectFile:
         """
         self.po_file.save(str(self.output_file_path))
         # self.output_file.write(str(self.po_file))
-

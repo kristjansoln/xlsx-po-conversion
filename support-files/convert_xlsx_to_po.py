@@ -25,5 +25,3 @@ else:  # execute xls2po conversion
 		print("Done. File " + output_file_path + " successfully generated.\n")
 	except:
 		print("Something went wrong during conversion.\n")
-
-# Test,Commit&push
