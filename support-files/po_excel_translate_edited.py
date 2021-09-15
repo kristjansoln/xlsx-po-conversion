@@ -1,6 +1,9 @@
 import os
 import sys
 import time
+# Edited
+#import click
+#import click
 import polib_edited as polib
 import openpyxl
 
@@ -181,6 +184,7 @@ class PortableObjectFileToXLSX:
         # The languages headers
         for f in self.po_files:
             columns.append(f.locale)
+            # Edited
             if f.locale == "default":
                 print('Warning: No locale specification found, using default.\n'
                       'You need to have "Language: bg_BG\\n" or similar in the header of the .po file.')
@@ -367,7 +371,7 @@ class PortableObjectFileToXLSX:
                     # Weird case
                     cell = WriteOnlyCell(self.work_sheet, value=msg.msgstr)
                     cell.font = self.font_fuzzy
-                    row.append(cell)
+                    row.append(cell)  # Edited
                     unlock = self.unlock_message_locale
                     # row.append(cell, unlock=self.unlock_message_locale)
                 else:
@@ -448,11 +452,13 @@ class XLSXToPortableObjectFile:
             message_locale_column_index = headers.get(locale)
 
             if message_id_column_index is None:
+                # Edited
                 print('Error: Could not find a "%s" column' % ColumnHeaders.message_id)
                 err = True
                 continue
 
             if message_locale_column_index is None:
+                # Edited
                 print('Error: Could not find a "%s" column. Check your locale settings or correct the name of the '
                       'translations column in the xlsx file.' % locale)
                 err = True
@@ -491,9 +497,11 @@ class XLSXToPortableObjectFile:
 
                     self.po_file.append(entry)
                 except IndexError:
+                    # Edited
                     print("Error: Row %s is too short" % row)
 
         if not self.po_file:
+            # Edited
             sys.exit("No messages found, aborting")
             # sys.exit("No messages found, aborting", 1)
 

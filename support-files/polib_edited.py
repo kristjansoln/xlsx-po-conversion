@@ -1013,6 +1013,7 @@ class POEntry(_BaseEntry):
         # occurrences (with text wrapping as xgettext does)
         if not self.obsolete and self.occurrences:
             filelist = []
+            # Edited
             #print(self.occurrences)
 
             if self.occurrences == "None":  # Vrstica prazna..ipd
