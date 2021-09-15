@@ -445,12 +445,13 @@ class XLSXToPortableObjectFile:
             message_locale_column_index = headers.get(locale)
 
             if message_id_column_index is None:
-                print('Could not find a "%s" column' % ColumnHeaders.message_id)
+                print('Error: Could not find a "%s" column' % ColumnHeaders.message_id)
                 err = True
                 continue
 
             if message_locale_column_index is None:
-                print('Could not find a "%s" column' % locale)
+                print('Error: Could not find a "%s" column. Check your locale settings or correct the name of the '
+                      'translations column in the xlsx file.' % locale)
                 err = True
                 continue
 
@@ -487,7 +488,7 @@ class XLSXToPortableObjectFile:
 
                     self.po_file.append(entry)
                 except IndexError:
-                    print("Row %s is too short" % row)
+                    print("Error: Row %s is too short" % row)
 
         if not self.po_file:
             sys.exit("No messages found, aborting", 1)

@@ -1,3 +1,4 @@
 @echo off
-convert_xlsx_to_po.py
+cd support-files
+py convert_xlsx_to_po.py
 pause
